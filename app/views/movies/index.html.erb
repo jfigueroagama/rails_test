@@ -1,0 +1,11 @@
+<h1>Movies index</h1>
+
+<%= form_tag 'movies/index', :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+
+
