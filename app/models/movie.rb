@@ -11,7 +11,7 @@ class Movie < ActiveResource::Base
   # Returns an array of movies that match title, default limit 1 (max 10).
   def self.find_all_by_title(title, limit=1)
     raise ArgumentError, "max limit on API for find_by_title is 10, #{limit} was provided" if limit > 10
-    result = get('/', :q => title, :limit => limit)
+    result = get('/', :title => title, :limit => limit)
     if result.is_a?(Hash) && result['error']
       ExceptionResponse.new result
     else
@@ -25,26 +25,15 @@ class Movie < ActiveResource::Base
   end
 
   # Override find since this service doesn't implement REST the way Rails expects
-  #def self.find(id)
-  #  result = get('/', :id => id)
-  # if result['error']
-  #   ExceptionResponse.new result
-  # else
-  #   new(result)
-  # end
-  #end
-    
-  # Search methos
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
-    #else
-    #  find(:all)
-    end
+  def self.find(id)
+    result = get('/', :id => id)
+   if result['error']
+     ExceptionResponse.new result
+   else
+     new(result)
+   end
   end
-
-
-
+    
   # takes json response from service and creates exception
   # response example:  { "code" => 404, "error" => "Film not found" }
   class ExceptionResponse
