@@ -7,6 +7,8 @@ gem 'activeresource', :require => 'active_resource'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+gem 'bootstrap-sass'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -45,3 +47,4 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'rspec-rails', group: [:development, :test]
+gem 'capybara', group: [:test]

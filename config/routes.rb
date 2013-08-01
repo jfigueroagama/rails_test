@@ -1,5 +1,5 @@
 RailsTest::Application.routes.draw do
-  get "movies/index"
+  resources :movies, only: [:show, :index]
   
   root to: "movies#index"
   
